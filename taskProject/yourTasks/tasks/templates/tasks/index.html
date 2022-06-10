@@ -1,0 +1,11 @@
+{% extends "tasks/base.html" %} {% block title %} Your Tasks {% endblock %}
+{%block body %}
+<h1>These are your tasks for the day <span>{{name}}</span>:</h1>
+<ol>
+  {% for task in tasks %}
+  <li>{{task.task}}</li>
+  {% endfor %}
+</ol>
+<br>
+<a href = {% url 'tasks:add' %}>Add task</a>
+{% endblock %}
