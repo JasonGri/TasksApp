@@ -8,18 +8,6 @@ from utils.add import sort_tasks, add_tasks
 
 #tasks = {1: 'Pay Bills', 2: 'Workout', 3: 'Pick my sister from practice'}
 
-tasks = [
-    {'task':'Pay Bills',
-    'priority':1},
-    {'task':'Workout',
-    'priority':2},
-    {'task':'Buy Clothes',
-    'priority':3},
-    {'task':'Pick my sister from practice',
-    'priority':4}
-]
-
-
 class NewTaskForm(forms.Form):
 
     task = forms.CharField(label="Enter Your Task")
@@ -27,10 +15,10 @@ class NewTaskForm(forms.Form):
 
 
 def index(req):
-
-    context = {'name': 'Jason', 'tasks': tasks}
-
-    return render(req, URL_TASKS, context)
+    if "tasks" not in req.session:
+        req.session["tasks"] = []
+    context = {'name': 'Jason', 'tasks': req.session['tasks']}
+    return  render(req, URL_TASKS, context)
 
 def add(req):
 
@@ -51,8 +39,10 @@ def add(req):
             priority = form.cleaned_data['priority']
             '''form.cleaned_data is a dictionary
             print(form.cleaned_data)'''
+            #FIXME:Add this to the add.py
+            req.session['tasks'] += [task]
             #FIXME:I can improve the priority feature
-            sort_tasks(add_tasks(tasks, task, priority))               
+            #sort_tasks(add_tasks(req.session['tasks'], task, priority))                
             
             return HttpResponseRedirect(reverse('tasks:index'))
         #TODO: Isn't this redundant?

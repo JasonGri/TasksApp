@@ -1,3 +1,14 @@
+'''tasks = [
+    {'task':'Pay Bills',
+    'priority':1},
+    {'task':'Workout',
+    'priority':2},
+    {'task':'Buy Clothes',
+    'priority':3},
+    {'task':'Pick my sister from practice',
+    'priority':4}
+]'''
+
 def sort_tasks(tasks):
     for iter_num in range(len(tasks)-1, 0, -1):
         
