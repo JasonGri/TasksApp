@@ -33,9 +33,9 @@ def add_tasks(tasks, task, priority):
     
 
     if priority not in plst:
-        tasks.append({'task':task, 'priority': priority})
+        tasks += [{'task':task, 'priority':priority}]
 
     else:
-        tasks.append({'task':task, 'priority': (plst[-1]+1) })
+        tasks += [{'task':task, 'priority':(plst[-1]+1)}]
     
     return tasks
